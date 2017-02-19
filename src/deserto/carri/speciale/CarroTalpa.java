@@ -5,10 +5,26 @@
  */
 package deserto.carri.speciale;
 
+import deserto.carri.normali.CarroLineare;
+import deserto.pos.Posizione;
+
 /**
  *
  * @author FSEVERI\romano3927
  */
-public class CarroTalpa {
-    
+public class CarroTalpa extends CarroLineare{
+    private boolean sotto=false;
+    public CarroTalpa(int n, Posizione coordinate) {
+        super(n, coordinate);
+    }
+    @Override
+    public String fuoco(Posizione c){
+        return "";
+    }
+    public void scoperto(){
+        sotto=false;
+    }
+    public void nascosto(){
+        sotto=true;
+    }
 }
