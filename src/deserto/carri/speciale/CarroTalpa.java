@@ -8,6 +8,8 @@ package deserto.carri.speciale;
 import deserto.carri.normali.CarroLineare;
 import deserto.pos.Pezzo;
 import deserto.pos.Posizione;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -24,12 +26,13 @@ public class CarroTalpa extends CarroLineare {
 
     @Override
     public String fuoco(Posizione c) {
-        Posizione o = getPosizione();
+        Posizione o = new Posizione(getPosizione());
         for (int i = 0; i < getCarro().size(); i++) {
             if (!getPezzo(i).distrutto()) {
                 if (o.equals(c)) {
                     if(sotto){
                         getPezzo(i).rmEnergia(25);
+                        scoperto();
                         if(getPezzo(i).distrutto()) return "distrutto";
                         else return "colpito";
                     }
@@ -40,14 +43,15 @@ public class CarroTalpa extends CarroLineare {
                         }
                         else{
                             getPezzo(i).rmEnergia(50);
-                            return "colpito";
+                            if(getPezzo(i).distrutto()) return "distrutto";
+                            else return "colpito";
                         }
                     }
                 }
                 o.addX(1);
             }
         }
-        return "sabbia";
+        return "mancato";
     }
 
     public void scoperto() {
@@ -56,5 +60,21 @@ public class CarroTalpa extends CarroLineare {
 
     public void nascosto() {
         sotto = true;
+    }
+    @Override
+    public void draw(Graphics2D g2) {
+        ArrayList<Pezzo> carro = getCarro();
+        Posizione p = new Posizione(getPosizione());
+        for (int i = 0; i < carro.size(); i++) {
+            if (carro.get(i).distrutto()==false) {
+                if(!sotto) g2.setColor(Color.BLUE);
+                else g2.setColor(Color.GRAY);
+                g2.fillRect(p.getX() * 20+20, p.getY() * 20+20, 20, 20);
+                g2.setColor(Color.BLACK);
+                g2.drawRect(p.getX() * 20+20, p.getY() * 20+20, 20, 20);
+                g2.drawString("" + carro.get(i).getPos() + "", p.getX() * 20 + 5+20, p.getY() * 20 + 15+20);
+                p.addX(1);
+            }
+        }
     }
 }

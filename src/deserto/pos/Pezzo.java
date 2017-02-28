@@ -17,12 +17,16 @@ public class Pezzo {
         this.p=p;
     }
     public boolean distrutto(){
-        return energia==0;
+        return energia <=0;
     }
     public int getEnergia() {
         return energia;
     }
 
+    public int getPos() {
+        return p;
+    }
+    
     public void rmEnergia(int energia) {
         this.energia -= energia;
     }

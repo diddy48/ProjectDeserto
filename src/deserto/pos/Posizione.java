@@ -20,6 +20,11 @@ public class Posizione {
         this.y = y;
     }
 
+    public Posizione(Posizione posizione) {
+        this.x=posizione.getX();
+        this.y=posizione.getY();
+    }
+
     public int getX() {
         return x;
     }
@@ -55,5 +60,12 @@ public class Posizione {
 
     public void addX(int i) {
         x+=i;
+    }
+
+    public void addY(int i) {
+        y+=i;
+    }
+    public void setX(int x){
+        this.x=x;
     }
 }

@@ -7,6 +7,7 @@ package deserto.carri;
 
 import deserto.pos.Pezzo;
 import deserto.pos.Posizione;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -18,8 +19,8 @@ public abstract class CarroCantiere {
     private Posizione coordinate;
 
     public CarroCantiere(int n,Posizione coordinate) {
-        carro=new ArrayList<Pezzo>(n);
-        for(int i=0;i<carro.size();i++) carro.add(new Pezzo(i));
+        carro=new ArrayList<Pezzo>();
+        for(int i=0;i<n;i++) carro.add(new Pezzo(i));
         this.coordinate = coordinate;
     }
     public abstract String stato();

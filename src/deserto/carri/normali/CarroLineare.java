@@ -8,6 +8,8 @@ package deserto.carri.normali;
 import deserto.carri.CarroCantiere;
 import deserto.pos.Pezzo;
 import deserto.pos.Posizione;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -42,12 +44,12 @@ public class CarroLineare extends CarroCantiere {
         for (int i = 0; i < getCarro().size(); i++) {
             en += getPezzo(i).getEnergia();
         }
-        return en == 0;
+        return en <= 0;
     }
 
     @Override
     public String fuoco(Posizione c) {
-        Posizione o = getPosizione();
+        Posizione o = new Posizione(getPosizione());
         for (int i = 0; i < getCarro().size(); i++) {
             if (!getPezzo(i).distrutto()) {
                 if (o.equals(c)) {
@@ -62,6 +64,21 @@ public class CarroLineare extends CarroCantiere {
                 o.addX(1);
             }
         }
-        return "sabbia";
+        return "mancato";
+    }
+
+    public void draw(Graphics2D g2) {
+        ArrayList<Pezzo> carro = getCarro();
+        Posizione p = new Posizione(getPosizione());
+        for (int i = 0; i < carro.size(); i++) {
+            if (carro.get(i).distrutto()==false) {
+                g2.setColor(Color.RED);
+                g2.fillRect(p.getX() * 20+20, p.getY() * 20+20, 20, 20);
+                g2.setColor(Color.BLACK);
+                g2.drawRect(p.getX() * 20+20, p.getY() * 20+20, 20, 20);
+                g2.drawString("" + carro.get(i).getPos() + "", p.getX() * 20 + 5+20, p.getY() * 20 + 15+20);
+                p.addX(1);
+            }
+        }
     }
 }
