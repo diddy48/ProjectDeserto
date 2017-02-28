@@ -32,21 +32,64 @@ public class Deserto {
      */
     public static void main(String[] args) throws InterruptedException {
         Random rand = new Random();
-        boolean[] arraySabotaggio = {true, false, false, false, false, false, false, false, false, false};
-        CarroLineare carroL = new CarroLineare(3, new Posizione(1, 1));
-        CarroQuadrato carroQ = new CarroQuadrato(9, new Posizione(12, 7));
-        CarroTalpa carroT = new CarroTalpa(5, new Posizione(7, 10));
-        CarroTalpa carroT1 = new CarroTalpa(6, new Posizione(20, 6));
-        System.out.println("Benvenuto nella simulazione di una battaglia navale");
-        System.out.println("Quante proiettili vuoi sparare?");
         Scanner in = new Scanner(System.in);
-        int n =7000;// in.nextInt();
+        boolean[] arraySabotaggio = {true, false, false, false, false, false, false, false, false, false};
+        System.out.println("Benvenuto nella simulazione di una battaglia navale");
+        int pezzi;
+        do{
+            System.out.println("Inserire il numero di pezzi del carro lineare");
+            pezzi=in.nextInt();
+        }while(pezzi>33 || pezzi<=0);
+        int x,y;
+        do{
+            System.out.println("Inserire la Posizione tra 0 e 33 per le x, mentre tra 0 e 17 per le y\nIndica la prim cella del carro");
+            x=in.nextInt();
+            y=in.nextInt();
+        }while((x>33 || x<0 )&&(y>17 || y<0));
+        CarroLineare carroL = new CarroLineare(pezzi, new Posizione(x, y));
+        do{
+            System.out.println("Inserire il la larghezza del lato del carro");
+            pezzi=in.nextInt();
+        }while(pezzi>17 || pezzi<=0);
+        do{
+            System.out.println("Inserire la Posizione tra 0 e 33 per le x, mentre tra 0 e 17 per le y\nIndica la prim cella del carro");
+            x=in.nextInt();
+            y=in.nextInt();
+        }while((x>33 || x<0 )&&(y>17 || y<0));
+        CarroQuadrato carroQ = new CarroQuadrato(pezzi*pezzi, new Posizione(x, y));
+        do{
+            System.out.println("Inserire il numero di pezzi del carro Talpa");
+            pezzi=in.nextInt();
+        }while(pezzi>33 || pezzi<=0);
+        do{
+            System.out.println("Inserire la Posizione tra 0 e 33 per le x, mentre tra 0 e 17 per le y\nIndica la prim cella del carro");
+            x=in.nextInt();
+            y=in.nextInt();
+        }while((x>33 || x<0 )&&(y>17 || y<0));
+        CarroTalpa carroT = new CarroTalpa(pezzi, new Posizione(x, y));
+        do{
+            System.out.println("Inserire il numero di pezzi del carro Talpa");
+            pezzi=in.nextInt();
+        }while(pezzi>33 || pezzi<=0);
+        do{
+            System.out.println("Inserire la Posizione tra 0 e 33 per le x, mentre tra 0 e 17 per le y\nIndica la prim cella del carro");
+            x=in.nextInt();
+            y=in.nextInt();
+        }while((x>33 || x<0 )&&(y>17 || y<0));
+        CarroTalpa carroT1 = new CarroTalpa(pezzi, new Posizione(x, y));
+        System.out.println("Quante proiettili vuoi sparare?\nConsiglio un numero grande come 5000");
+        int n =in.nextInt();
         ArrayList<CarroCantiere> carri = new ArrayList<CarroCantiere>();
         carri.add(carroL);
         carri.add(carroT);
         carri.add(carroQ);
         carri.add(carroT1);
-        carroT1.nascosto();
+        System.out.println("Vuoi che il primo carro sia nascosto?");
+        String a=in.next();
+        if(a.equals('Y')) carroT.nascosto();
+        System.out.println("Vuoi che il secondo carro sia nascosto?");
+        String b=in.next();
+        if(b.equals('Y')) carroT1.nascosto();
         Battaglia game = new Battaglia(carri, n);
         Date data = new Date();
         for (int i = 0; i < n; i++) {

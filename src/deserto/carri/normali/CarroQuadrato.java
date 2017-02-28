@@ -91,7 +91,7 @@ public class CarroQuadrato extends CarroCantiere {
                 g2.fillRect(p.getX() * 20 + 20, p.getY() * 20 + 20, 20, 20);
                 g2.setColor(Color.BLACK);
                 g2.drawRect(p.getX() * 20 + 20, p.getY() * 20 + 20, 20, 20);
-                g2.drawString("" + carro.get(i).getPos() + "", p.getX() * 20 + 5 + 20, p.getY() * 20 + 15 + 20);
+                g2.drawString("" + carro.get(i).getPos() + "", p.getX() * 20  + 20, p.getY() * 20 + 15 + 20);
                 p.addX(1);
 
             }
