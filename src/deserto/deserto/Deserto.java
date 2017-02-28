@@ -32,6 +32,7 @@ public class Deserto {
      */
     public static void main(String[] args) throws InterruptedException {
         Random rand = new Random();
+        boolean[] arraySabotaggio = {true, false, false, false, false, false, false, false, false, false};
         CarroLineare carroL = new CarroLineare(3, new Posizione(1, 1));
         CarroQuadrato carroQ = new CarroQuadrato(9, new Posizione(12, 7));
         CarroTalpa carroT = new CarroTalpa(5, new Posizione(7, 10));
@@ -39,7 +40,7 @@ public class Deserto {
         System.out.println("Benvenuto nella simulazione di una battaglia navale");
         System.out.println("Quante proiettili vuoi sparare?");
         Scanner in = new Scanner(System.in);
-        int n = 4000;//in.nextInt();
+        int n =7000;// in.nextInt();
         ArrayList<CarroCantiere> carri = new ArrayList<CarroCantiere>();
         carri.add(carroL);
         carri.add(carroT);
@@ -56,28 +57,52 @@ public class Deserto {
 
             for (int j = 0; j < carri.size(); j++) {
                 String risultato = carri.get(j).fuoco(lancio);
-                
+
                 game.updateLog("Un pezzo del " + carri.get(j).getClass().getSimpleName() + " è stato " + risultato);
                 game.repaint();
-                if(carri.get(j).distrutto()){
+                if (carri.get(j).distrutto()) {
                     game.updateLog("\nIl " + carri.get(j).getClass().getSimpleName() + " è stato ditrutto\n");
                     carri.remove(j);
+                } else {
+                    game.updateLog("Il " + carri.get(j).getClass().getSimpleName() + " è " + carri.get(j).stato());
                 }
                 if (carri.size() == 0) {
                     game.updateLog("Tutti i carri sono stati distrutti");
                     Thread.sleep(10000);
                     System.exit(0);
-                } else {
-                    game.updateLog("Il " + carri.get(j).getClass().getSimpleName() + " è " + carri.get(j).stato());
                 }
             }
-
+            //Sabotaggio
+            if (arraySabotaggio[rand.nextInt(10)]) {
+                boolean[] arraySabotaggioTrue = {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+                if (arraySabotaggioTrue[rand.nextInt(20)]) {
+                    game.updateLog("\nIl cannone è stato sabotato e perde 12 proiettili");
+                    n -= 11;
+                    for (int k = 0; k < carri.size(); k++) {
+                        if (carri.get(k).getClass() == CarroTalpa.class) {
+                            CarroTalpa ct = (CarroTalpa) carri.get(k);
+                            ct.scoperto();
+                        }
+                    }
+                }
+            }
+            //Far coprire il carro
+            boolean[] arrayCopri = {true, false, false, false, false};
+            if (arrayCopri[rand.nextInt(5)]) {
+                for (int k = 0; k < carri.size(); k++) {
+                    if (carri.get(k).getClass() == CarroTalpa.class) {
+                        CarroTalpa ct = (CarroTalpa) carri.get(k);
+                        ct.nascosto();
+                    }
+                }
+            }
             try {
                 Thread.sleep(Deserto.INTERTIME);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Battaglia.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        game.updateLog("\n Hai esaurito i proiettili");
     }
 
 }

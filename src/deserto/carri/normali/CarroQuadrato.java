@@ -29,15 +29,16 @@ public class CarroQuadrato extends CarroCantiere {
     public String stato() {
         ArrayList<Pezzo> carro = super.getCarro();
         int c = 0;
+        
         for (int i = 0; i < carro.size(); i++) {
             c += getPezzo(i).getEnergia();
         }
         if (c == 0) {
             return "distrutto";
-        } else if (c == (carro.size() * 100)) {
-            return "integro";
-        } else {
+        }else if(carro.size()!=col*col){
             return "danneggiato";
+        } else {
+            return "integro";
         }
     }
 
