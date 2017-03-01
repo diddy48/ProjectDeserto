@@ -55,11 +55,10 @@ public class Battaglia extends JFrame implements ActionListener {
 
     public Battaglia(ArrayList<CarroCantiere> carri, int n) {
         this.n = n;
-        pControl.setLayout(new GridLayout(2, 1));
+        pControl.setLayout(new GridLayout(1, 1));
         ArrayList<String> titles = new ArrayList<String>();
-        titles.add("Avvia");
         titles.add("Esci");
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             buttons.add(new JButton(titles.get(i)));
             pControl.add(buttons.get(i));
             buttons.get(i).addActionListener(this);
@@ -100,27 +99,7 @@ public class Battaglia extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Random rand = new Random();
         if (e.getSource() == buttons.get(0)) {
-            /*for (int i = 0; i < n; i++) {
-                int xRand = rand.nextInt(33) + 1;
-                int yRand = rand.nextInt(17) + 1;
-                Posizione lancio = new Posizione(xRand, yRand);
-                updateLog("Proiettile lanciato in posizione " + xRand + "," + yRand);
-
-                for (int j = 0; j < carri.size(); j++) {
-                    String risultato = carri.get(j).fuoco(lancio);
-                    updateLog("Un pezzo del " + carri.get(j).getClass().getSimpleName() + " è stato " + risultato);
-                    repaint();
-                }
-
-                try {
-                    Thread.sleep(Deserto.INTERTIME);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Battaglia.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }*/
-        } else if (e.getSource() == buttons.get(1)) {
             System.exit(0);
         }
     }

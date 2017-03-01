@@ -20,28 +20,44 @@ public class CarroQuadrato extends CarroCantiere {
 
     private int col;
 
+    /**
+     * Costruttore
+     *
+     * @param n numero di pezzi
+     * @param coordinate coordinate della prima cella
+     */
     public CarroQuadrato(int n, Posizione coordinate) {
         super(n, coordinate);
         col = (int) Math.sqrt(n);
     }
 
+    /**
+     * Restituisce una stringa rappresentante lo stato del carro
+     *
+     * @return stringa che rappresenta lo stato del carro
+     */
     @Override
     public String stato() {
         ArrayList<Pezzo> carro = super.getCarro();
         int c = 0;
-        
+
         for (int i = 0; i < carro.size(); i++) {
             c += getPezzo(i).getEnergia();
         }
         if (c == 0) {
             return "distrutto";
-        }else if(carro.size()!=col*col){
+        } else if (carro.size() != col * col) {
             return "danneggiato";
         } else {
             return "integro";
         }
     }
 
+    /**
+     * Controlla se il carro è stato distrutto
+     *
+     * @return true se ditrutto e false altrimenti
+     */
     @Override
     public boolean distrutto() {
         int en = 0;
@@ -50,11 +66,18 @@ public class CarroQuadrato extends CarroCantiere {
         }
         return en <= 0;
     }
-
+    /**
+     * Restituisce il numero di colonne del carro quadrato
+     * @return numero di colonne del carro quadrato
+     */
     public int getCols() {
         return col;
     }
-
+    /**
+     * Controlla se il carro è stato colpito
+     * @param c posizione del proiettile
+     * @return stringa che indica se il carro è stato colpito, sistrutto o mancato
+     */
     @Override
     public String fuoco(Posizione c) {
         Posizione o = new Posizione(getPosizione());
@@ -75,7 +98,10 @@ public class CarroQuadrato extends CarroCantiere {
         }
         return "mancato";
     }
-
+    /**
+     * Disegna il carro
+     * @param g2 contesto grafico
+     */
     public void draw(Graphics2D g2) {
         ArrayList<Pezzo> carro = getCarro();
         Posizione p = new Posizione(getPosizione());
@@ -91,7 +117,7 @@ public class CarroQuadrato extends CarroCantiere {
                 g2.fillRect(p.getX() * 20 + 20, p.getY() * 20 + 20, 20, 20);
                 g2.setColor(Color.BLACK);
                 g2.drawRect(p.getX() * 20 + 20, p.getY() * 20 + 20, 20, 20);
-                g2.drawString("" + carro.get(i).getPos() + "", p.getX() * 20  + 20, p.getY() * 20 + 15 + 20);
+                g2.drawString("" + carro.get(i).getPos() + "", p.getX() * 20 + 20, p.getY() * 20 + 15 + 20);
                 p.addX(1);
 
             }

@@ -17,11 +17,18 @@ import java.util.ArrayList;
  * @author FSEVERI\romano3927
  */
 public class CarroLineare extends CarroCantiere {
-
+    /**
+     * Costruttore
+     * @param n numero di pezzi
+     * @param coordinate coordinate della prima cella
+     */
     public CarroLineare(int n, Posizione coordinate) {
         super(n, coordinate);
     }
-
+    /**
+     * Restituisce una stringa rappresentante lo stato del carro
+     * @return stringa che rappresenta lo stato del carro
+     */
     @Override
     public String stato() {
         ArrayList<Pezzo> carro = super.getCarro();
@@ -37,7 +44,10 @@ public class CarroLineare extends CarroCantiere {
             return "danneggiato";
         }
     }
-
+    /**
+     * Controlla se il carro è stato distrutto
+     * @return true se ditrutto e false altrimenti
+     */
     @Override
     public boolean distrutto() {
         int en = 0;
@@ -46,7 +56,11 @@ public class CarroLineare extends CarroCantiere {
         }
         return en <= 0;
     }
-
+    /**
+     * Controlla se il carro è stato colpito
+     * @param c posizione del proiettile
+     * @return stringa che indica se il carro è stato colpito, sistrutto o mancato
+     */
     @Override
     public String fuoco(Posizione c) {
         Posizione o = new Posizione(getPosizione());
@@ -66,7 +80,10 @@ public class CarroLineare extends CarroCantiere {
         }
         return "mancato";
     }
-
+    /**
+     * Disegna il carro
+     * @param g2 contesto grafico
+     */
     public void draw(Graphics2D g2) {
         ArrayList<Pezzo> carro = getCarro();
         Posizione p = new Posizione(getPosizione());

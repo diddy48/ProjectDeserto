@@ -19,11 +19,19 @@ import java.util.ArrayList;
 public class CarroTalpa extends CarroLineare {
 
     private boolean sotto = false;
-
+    /**
+     * Costruttore
+     * @param n numero di pezzi
+     * @param coordinate coordinate della prima cella
+     */
     public CarroTalpa(int n, Posizione coordinate) {
         super(n, coordinate);
     }
-
+    /**
+     * Controlla se il carro è stato colpito
+     * @param c posizione del proiettile
+     * @return stringa che indica se il carro è stato colpito, sistrutto o mancato
+     */
     @Override
     public String fuoco(Posizione c) {
         Posizione o = new Posizione(getPosizione());
@@ -53,14 +61,22 @@ public class CarroTalpa extends CarroLineare {
         }
         return "mancato";
     }
-
+    /**
+     * Scopre il carro
+     */
     public void scoperto() {
         sotto = false;
     }
-
+    /**
+     * Nasconde il carro
+     */
     public void nascosto() {
         sotto = true;
     }
+    /**
+     * Disegna il carro
+     * @param g2 contesto grafico
+     */
     @Override
     public void draw(Graphics2D g2) {
         ArrayList<Pezzo> carro = getCarro();
